@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Total Sales</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-5sAR7xN1Nv6P6T6k6Jvi1UxH17rrO7csa6pPWPQezyHGc+aM7l5t8/5U8UHp5jw/
+    crossorigin="anonymous">
+    <style>
+        body {
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Sales Summary</h1>
+        <div id="total-sales" class="alert alert-success text-center mt-4">Loading...</div>
+    </div>
+
+    <script>
+        // CSV Data
+        const csvData = `product,sales\nApple,150\nBanana,75\nOrange,125`;
+
+        // Function to parse CSV and calculate total sales
+        function calculateTotalSales(csvString) {
+            const rows = csvString.split("\n");
+            let totalSales = 0;
+
+            rows.slice(1).forEach(row => {
+                const cols = row.split(",");
+                totalSales += parseFloat(cols[1]);
+            });
+
+            return totalSales;
+        }
+
+        // Calculate total sales and display
+        document.addEventListener('DOMContentLoaded', function() {
+            const totalSales = calculateTotalSales(csvData);
+            document.getElementById('total-sales').textContent = `Total Sales: $${totalSales}`;
+        });
+    </script>
+</body>
+</html>
